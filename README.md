@@ -44,6 +44,8 @@ vue
 
 ```
 
+---
+
 ### ⚙️ Props
 
 Prop	Type	Default	Description
@@ -66,8 +68,11 @@ If range = { from: 10, to: 70 }
 
 you’ll get a visual slider with two thumbs between 10% and 70%.
 
+---
+
 #### 🧾 License
 
 MIT
+
 
 #### Built with ❤️ by Dnylfrd.
