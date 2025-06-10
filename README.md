@@ -10,7 +10,7 @@ A minimal **dual-thumb range slider** component for **Vue 3**, with no external 
 
 ```bash
 
-npm install vue-range
+npm install vue-range-dnylfrd
 
 ```
 
@@ -56,17 +56,17 @@ app.use(VueRange.default)
 
 ## ⚙️ Props
 
-| Prop         | Type   | Default               | Description              |
-|--------------|--------|-----------------------|--------------------------|
-| `min`        | Number | `0`                   | Minimum slider value     |
-| `max`        | Number | `100`                 | Maximum slider value     |
-| `modelValue` | Object | `{ from: 20, to: 80 }`| Selected range object    |
+| Prop         | Type   | Default                | Description              |
+|--------------|--------|------------------------|--------------------------|
+| `min`        | Number | `0`                    | Minimum slider value     |
+| `max`        | Number | `100`                  | Maximum slider value     |
+| `modelValue` | Object | `{ from: 20, to: 80 }` | Selected range object    |
 
 
 ### 📤 Emits
 
 | Event              | Payload                     | Description                   |
-|:-------------------|:---------------------------:|------------------------------:|
+|:-------------------:|:---------------------------:|:------------------------------:|
 | `update:modelValue` | `{ from: Number, to: Number }` | Fired when the range changes   |
 
 ### 🧪 Example Output
