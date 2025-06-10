@@ -17,9 +17,8 @@ npm install vue-range
 ## 🚀 Usage
 
 1. Register component
-js
 
-```bash
+```js
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -28,10 +27,19 @@ const app = createApp(App)
 app.component('RangeSlider', RangeSlider)
 
 ```
-2. Use in template
-vue
 
-```bash
+ℹ️ CommonJS issue?
+If you're using a CommonJS environment, use this instead:
+
+```js
+
+import VueRange from 'vue-range'
+app.use(VueRange.default)
+
+```
+2. Use in template
+
+```vue
 
 <template>
   <RangeSlider v-model="range" :min="0" :max="100" />
@@ -46,23 +54,27 @@ vue
 
 ---
 
-### ⚙️ Props
+## ⚙️ Props
 
-Prop	Type	Default	Description
-min	Number	0	Minimum slider value
-max	Number	100	Maximum slider value
-modelValue	Object	{ from: 20, to: 80 }	Selected range object
+| Prop         | Type   | Default               | Description              |
+|--------------|--------|-----------------------|--------------------------|
+| `min`        | Number | `0`                   | Minimum slider value     |
+| `max`        | Number | `100`                 | Maximum slider value     |
+| `modelValue` | Object | `{ from: 20, to: 80 }`| Selected range object    |
+
 
 ### 📤 Emits
 
-Event	Payload	Description
-update:modelValue	{ from: Number, to: Number }	Triggered when range changes
+| Event              | Payload                     | Description                   |
+|:-------------------|:---------------------------:|------------------------------:|
+| `update:modelValue` | `{ from: Number, to: Number }` | Fired when the range changes   |
 
 ### 🧪 Example Output
 
-```bash
+IF:
+```js
 
-If range = { from: 10, to: 70 }
+ range = { from: 10, to: 70 }
 
 ```
 
@@ -75,4 +87,4 @@ you’ll get a visual slider with two thumbs between 10% and 70%.
 MIT
 
 
-#### Built with ❤️ by Dnylfrd.
+#### Built with ❤️ by [Dnylfrd](mailto:29danialfrd69@gmail.com).
