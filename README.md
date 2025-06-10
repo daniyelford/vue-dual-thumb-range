@@ -4,6 +4,7 @@ A minimal **dual-thumb range slider** component for **Vue 3**, with no external 
 
 ---
 
+![Vue Range Demo](https://github.com/daniyelford/vue-range/blob/main/2.PNG)
 
 
 ## 📦 Installation
