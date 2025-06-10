@@ -6,7 +6,7 @@ A minimal **dual-thumb range slider** component for **Vue 3**, with no external 
 
 
 
-# 📦 Installation
+## 📦 Installation
 
 ```bash
 
@@ -51,17 +51,23 @@ min	Number	0	Minimum slider value
 max	Number	100	Maximum slider value
 modelValue	Object	{ from: 20, to: 80 }	Selected range object
 
-#### 📤 Emits
+### 📤 Emits
 
 Event	Payload	Description
 update:modelValue	{ from: Number, to: Number }	Triggered when range changes
 
-##### 🧪 Example Output
+### 🧪 Example Output
 
-If range = { from: 10, to: 70 }, you’ll get a visual slider with two thumbs between 10% and 70%.
+```bash
 
-###### 🧾 License
+If range = { from: 10, to: 70 }
+
+```
+
+you’ll get a visual slider with two thumbs between 10% and 70%.
+
+#### 🧾 License
 
 MIT
 
-###### Built with ❤️ by Dnylfrd.
+#### Built with ❤️ by Dnylfrd.
