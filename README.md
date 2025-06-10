@@ -38,6 +38,14 @@ import VueDualThumbRange from 'vue-range-dual'
 app.use(VueDualThumbRange.default)
 
 ```
+
+or in easy use setup script
+
+```js
+import { VueDualThumbRange } from 'vue-dual-thumb-range'
+
+```
+
 2. Use in template
 
 ```vue
