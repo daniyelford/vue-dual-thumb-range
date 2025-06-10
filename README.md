@@ -23,9 +23,9 @@ npm install vue-range-dual
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import RangeSlider from 'vue-range'
+import VueRangeDual from 'vue-range-dual'
 const app = createApp(App)
-app.component('RangeSlider', RangeSlider)
+app.component('VueRangeDual', VueRangeDual)
 
 ```
 
@@ -34,7 +34,7 @@ If you're using a CommonJS environment, use this instead:
 
 ```js
 
-import VueRange from 'vue-range'
+import VueRangeDual from 'vue-range-dual'
 app.use(VueRange.default)
 
 ```
@@ -43,7 +43,7 @@ app.use(VueRange.default)
 ```vue
 
 <template>
-  <RangeSlider v-model="range" :min="0" :max="100" />
+  <VueRangeDual v-model="range" :min="0" :max="100" />
 </template>
 
 <script setup>
