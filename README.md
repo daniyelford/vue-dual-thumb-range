@@ -4,14 +4,14 @@ A minimal **dual-thumb range slider** component for **Vue 3**, with no external 
 
 ---
 
-![Vue Range Demo](https://github.com/daniyelford/vue-range/blob/main/2.PNG)
+![Vue Range Demo](https://github.com/daniyelford/vue-dual-thumb-range/blob/main/2.PNG)
 
 
 ## 📦 Installation
 
 ```bash
 
-npm install vue-range-dual
+npm install vue-dual-thumb-range
 
 ```
 
@@ -23,9 +23,9 @@ npm install vue-range-dual
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import VueRangeDual from 'vue-range-dual'
+import VueDualThumbRange from 'vue-dual-thumb-range'
 const app = createApp(App)
-app.component('VueRangeDual', VueRangeDual)
+app.component('VueDualThumbRange', VueDualThumbRange)
 
 ```
 
@@ -34,8 +34,8 @@ If you're using a CommonJS environment, use this instead:
 
 ```js
 
-import VueRangeDual from 'vue-range-dual'
-app.use(VueRange.default)
+import VueDualThumbRange from 'vue-range-dual'
+app.use(VueDualThumbRange.default)
 
 ```
 2. Use in template
@@ -43,7 +43,7 @@ app.use(VueRange.default)
 ```vue
 
 <template>
-  <VueRangeDual v-model="range" :min="0" :max="100" />
+  <VueDualThumbRange v-model="range" :min="0" :max="100" />
 </template>
 
 <script setup>

@@ -1,7 +1,7 @@
-import CustomRange from './src/CustomRange.vue'
+import VueDualThumbRange from './src/VueDualThumbRange.vue'
 export default {
   install(app) {
-    app.component('CustomRange', CustomRange)
+    app.component('VueDualThumbRange', VueDualThumbRange)
   }
 }
-export { CustomRange }
+export { VueDualThumbRange }

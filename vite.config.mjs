@@ -7,13 +7,13 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'index.js'),
-      name: 'VueRangeDual',
-      fileName: (format) => `vue-range-dual.${format}.js`
+      name: 'VueDualThumbRange',
+      fileName: (format) => `vue-dual-thumb-range.${format}.js`
     },
     rollupOptions: {
       external: ['vue'],
       output: {
-        exports: 'auto',
+        exports: 'named',
         globals: {
           vue: 'Vue'
         },

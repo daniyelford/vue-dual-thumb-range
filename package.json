@@ -1,17 +1,17 @@
 {
-  "name": "vue-range-dual",
+  "name": "vue-dual-thumb-range",
   "version": "1.0.0",
   "description": "🎯 Simple dual-thumb range slider for Vue 3 without any dependencies.",
   "author": "Dnylfrd <29danialfrd69@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "main": "dist/vue-range-dual.umd.js",
-  "module": "dist/vue-range-dual.es.js",
+  "main": "dist/vue-dual-thumb-range.umd.js",
+  "module": "dist/vue-dual-thumb-range.es.js",
   "types": "./src/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue-range-dual.es.js",
-      "require": "./dist/vue-range-dual.umd.js"
+      "import": "./dist/vue-dual-thumb-range.es.js",
+      "require": "./dist/vue-dual-thumb-range.umd.js"
     }
   },
   "files": [
