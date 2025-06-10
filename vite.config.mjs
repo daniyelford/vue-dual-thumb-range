@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'index.js'),
-      name: 'VueRange',
-      fileName: (format) => `vue-range.${format}.js`
+      name: 'VueRangeDual',
+      fileName: (format) => `vue-range-dual.${format}.js`
     },
     rollupOptions: {
       external: ['vue'],

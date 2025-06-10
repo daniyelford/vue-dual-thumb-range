@@ -5,13 +5,13 @@
   "author": "Dnylfrd <29danialfrd69@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "main": "dist/vue-range.umd.js",
-  "module": "dist/vue-range.es.js",
+  "main": "dist/vue-range-dual.umd.js",
+  "module": "dist/vue-range-dual.es.js",
   "types": "./src/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue-range.es.js",
-      "require": "./dist/vue-range.umd.js"
+      "import": "./dist/vue-range-dual.es.js",
+      "require": "./dist/vue-range-dual.umd.js"
     }
   },
   "files": [
