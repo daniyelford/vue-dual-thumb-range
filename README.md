@@ -11,7 +11,7 @@ A minimal **dual-thumb range slider** component for **Vue 3**, with no external 
 
 ```bash
 
-npm install vue-range-dnylfrd
+npm install vue-range-dual-thumb
 
 ```
 
