@@ -1,95 +1,85 @@
-import { ref as s, watch as h, computed as x, onBeforeUnmount as E, createElementBlock as T, openBlock as $, Fragment as B, createElementVNode as l, normalizeStyle as f, withModifiers as w, createTextVNode as y, withDirectives as V, vModelText as M } from "vue";
-const C = { style: { display: "flex", "justify-content": "space-between", "font-size": "13px", "margin-top": "10px" } }, L = ["min", "max"], N = ["min", "max"], I = {
+import { ref as p, computed as v, watch as V, onBeforeUnmount as B, createElementBlock as C, openBlock as L, Fragment as N, createElementVNode as o, normalizeStyle as g, withModifiers as M, createTextVNode as k, withDirectives as D, vModelText as R } from "vue";
+const I = { style: { display: "flex", "justify-content": "space-between", "font-size": "13px", "margin-top": "10px" } }, S = ["min", "max"], U = ["min", "max"], j = {
   __name: "VueDualThumbRange",
   props: {
     min: { type: Number, default: 0 },
     max: { type: Number, default: 100 },
     modelValue: {
       type: Object,
-      default: () => ({ from: 20, to: 80 })
+      default: () => ({ from: 10, to: 70 })
     }
   },
   emits: ["update:modelValue"],
-  setup(i, { emit: k }) {
-    const t = i, D = k, a = s(t.modelValue.from), n = s(t.modelValue.to), r = s(null), d = s(null);
-    h([a, n], ([o, e]) => {
-      if (e <= o) {
-        n.value = o + 1;
-        return;
-      }
-      (t.modelValue.from !== o || t.modelValue.to !== e) && D("update:modelValue", { from: o, to: e });
-    }), h(
-      () => t.modelValue,
-      ({ from: o, to: e }) => {
-        o !== a.value && (a.value = o), e !== n.value && (n.value = e);
-      }
-    );
-    const m = x(() => t.max - t.min), v = x(
-      () => (a.value - t.min) / m.value * 100
-    ), b = x(
-      () => (n.value - t.min) / m.value * 100
-    );
-    function c(o) {
-      if (!r.value || !d.value) return;
-      const e = d.value.getBoundingClientRect(), u = o.clientX - e.left, z = Math.min(Math.max(0, u / e.width * 100), 100), g = Math.round(t.min + z / 100 * m.value);
-      r.value === "from" ? a.value = Math.min(g, n.value - 1) : r.value === "to" && (n.value = Math.max(g, a.value + 1));
+  setup(d, { emit: z }) {
+    const n = d, E = z, m = p(null), f = p(null), r = v(() => Math.min(n.min, n.max)), i = v(() => Math.max(n.min, n.max)), x = v(() => i.value - r.value), s = (t, e, u) => Math.min(Math.max(t, e), u), l = p(s(n.modelValue.from, r.value, i.value - 1)), a = p(s(n.modelValue.to, l.value + 1, i.value));
+    V([l, a], () => {
+      let t = s(l.value, r.value, i.value), e = s(a.value, r.value, i.value);
+      e <= t && (e = t + 1, e > i.value && (e = i.value, t = e - 1)), t !== l.value && (l.value = t), e !== a.value && (a.value = e), (n.modelValue.from !== t || n.modelValue.to !== e) && E("update:modelValue", { from: t, to: e });
+    }), V(() => n.modelValue, ({ from: t, to: e }) => {
+      t !== l.value && (l.value = t), e !== a.value && (a.value = e);
+    });
+    const b = v(() => s((l.value - r.value) / x.value * 100, 0, 100)), h = v(() => s((a.value - r.value) / x.value * 100, 0, 100));
+    function w(t) {
+      if (!m.value || !f.value) return;
+      const e = f.value.getBoundingClientRect(), u = t.clientX - e.left, $ = s(u / e.width * 100, 0, 100), y = Math.round(r.value + $ / 100 * x.value);
+      m.value === "from" ? l.value = Math.min(y, a.value - 1) : m.value === "to" && (a.value = Math.max(y, l.value + 1));
     }
-    function R() {
-      document.addEventListener("mousemove", c), document.addEventListener("mouseup", p);
+    function T() {
+      document.addEventListener("mousemove", w), document.addEventListener("mouseup", c);
     }
-    function p() {
-      r.value = null, document.removeEventListener("mousemove", c), document.removeEventListener("mouseup", p);
+    function c() {
+      m.value = null, document.removeEventListener("mousemove", w), document.removeEventListener("mouseup", c);
     }
-    return E(() => p()), (o, e) => ($(), T(B, null, [
-      l("div", {
+    return B(() => c()), (t, e) => (L(), C(N, null, [
+      o("div", {
         style: { position: "relative", height: "30px", margin: "10px 0" },
         ref_key: "track",
-        ref: d,
-        onMousedown: R
+        ref: f,
+        onMousedown: T
       }, [
-        e[4] || (e[4] = l("div", { style: { position: "absolute", top: "50%", height: "4px", width: "100%", "background-color": "#ccc", transform: "translateY(-50%)", "border-radius": "2px", "z-index": "1" } }, null, -1)),
-        l("div", {
-          style: f({ left: `${v.value}%`, width: `${b.value - v.value}%`, position: "absolute", top: "50%", height: "4px", backgroundColor: "#3b82f6", transform: "translateY(-50%)", borderRadius: "2px", zIndex: 2 })
+        e[4] || (e[4] = o("div", { style: { position: "absolute", top: "50%", height: "4px", width: "100%", "background-color": "#ccc", transform: "translateY(-50%)", "border-radius": "2px", "z-index": "1" } }, null, -1)),
+        o("div", {
+          style: g({ left: `${b.value}%`, width: `${h.value - b.value}%`, position: "absolute", top: "50%", height: "4px", backgroundColor: "#3b82f6", transform: "translateY(-50%)", borderRadius: "2px", zIndex: 2 })
         }, null, 4),
-        l("div", {
-          style: f({ left: `${v.value}%`, position: "absolute", top: "50%", transform: "translate(-50%, -50%)", height: "16px", width: "16px", backgroundColor: "#3b82f6", borderRadius: "50%", cursor: "grab", zIndex: 3, border: "2px solid white", boxShadow: "0 0 2px rgba(0, 0, 0, 0.4)" }),
-          onMousedown: e[0] || (e[0] = w((u) => r.value = "from", ["prevent"]))
+        o("div", {
+          style: g({ left: `${b.value}%`, position: "absolute", top: "50%", transform: "translate(-50%, -50%)", height: "16px", width: "16px", backgroundColor: "#3b82f6", borderRadius: "50%", cursor: "grab", zIndex: 3, border: "2px solid white", boxShadow: "0 0 2px rgba(0, 0, 0, 0.4)" }),
+          onMousedown: e[0] || (e[0] = M((u) => m.value = "from", ["prevent"]))
         }, null, 36),
-        l("div", {
-          style: f({ left: `${b.value}%`, position: "absolute", top: "50%", transform: "translate(-50%, -50%)", height: "16px", width: "16px", backgroundColor: "#3b82f6", borderRadius: "50%", cursor: "grab", zIndex: 3, border: "2px solid white", boxShadow: "0 0 2px rgba(0, 0, 0, 0.4)" }),
-          onMousedown: e[1] || (e[1] = w((u) => r.value = "to", ["prevent"]))
+        o("div", {
+          style: g({ left: `${h.value}%`, position: "absolute", top: "50%", transform: "translate(-50%, -50%)", height: "16px", width: "16px", backgroundColor: "#3b82f6", borderRadius: "50%", cursor: "grab", zIndex: 3, border: "2px solid white", boxShadow: "0 0 2px rgba(0, 0, 0, 0.4)" }),
+          onMousedown: e[1] || (e[1] = M((u) => m.value = "to", ["prevent"]))
         }, null, 36)
       ], 544),
-      l("div", C, [
-        l("label", null, [
-          e[5] || (e[5] = y(" from: ")),
-          V(l("input", {
+      o("div", I, [
+        o("label", null, [
+          e[5] || (e[5] = k(" from: ")),
+          D(o("input", {
             style: { width: "60px", "margin-right": "5px" },
             type: "number",
-            "onUpdate:modelValue": e[2] || (e[2] = (u) => a.value = u),
-            min: i.min,
-            max: n.value - 1
-          }, null, 8, L), [
+            "onUpdate:modelValue": e[2] || (e[2] = (u) => l.value = u),
+            min: d.min,
+            max: a.value - 1
+          }, null, 8, S), [
             [
-              M,
-              a.value,
+              R,
+              l.value,
               void 0,
               { number: !0 }
             ]
           ])
         ]),
-        l("label", null, [
-          e[6] || (e[6] = y(" to: ")),
-          V(l("input", {
+        o("label", null, [
+          e[6] || (e[6] = k(" to: ")),
+          D(o("input", {
             style: { width: "60px", "margin-right": "5px" },
             type: "number",
-            "onUpdate:modelValue": e[3] || (e[3] = (u) => n.value = u),
-            min: a.value + 1,
-            max: i.max
-          }, null, 8, N), [
+            "onUpdate:modelValue": e[3] || (e[3] = (u) => a.value = u),
+            min: l.value + 1,
+            max: d.max
+          }, null, 8, U), [
             [
-              M,
-              n.value,
+              R,
+              a.value,
               void 0,
               { number: !0 }
             ]
@@ -98,12 +88,12 @@ const C = { style: { display: "flex", "justify-content": "space-between", "font-
       ])
     ], 64));
   }
-}, U = {
-  install(i) {
-    i.component("VueDualThumbRange", I);
+}, P = {
+  install(d) {
+    d.component("VueDualThumbRange", j);
   }
 };
 export {
-  I as VueDualThumbRange,
-  U as default
+  j as VueDualThumbRange,
+  P as default
 };

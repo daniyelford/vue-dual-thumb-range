@@ -23,41 +23,46 @@
         max: { type: Number, default: 100 },
         modelValue: {
             type: Object,
-            default: () => ({ from: 20, to: 80 }),
+            default: () => ({ from: 10, to: 70 }),
         },
     })
     const emit = defineEmits(['update:modelValue'])
-    const internalFrom = ref(props.modelValue.from)
-    const internalTo = ref(props.modelValue.to)
     const dragging = ref(null)
     const track = ref(null)
-    watch([internalFrom, internalTo], ([from, to]) => {
+    const safeMin = computed(() => Math.min(props.min, props.max))
+    const safeMax = computed(() => Math.max(props.min, props.max))
+    const total = computed(() => safeMax.value - safeMin.value)
+    const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
+    const internalFrom = ref(clamp(props.modelValue.from, safeMin.value, safeMax.value - 1))
+    const internalTo = ref(clamp(props.modelValue.to, internalFrom.value + 1, safeMax.value))
+    watch([internalFrom, internalTo], () => {
+        let from = clamp(internalFrom.value, safeMin.value, safeMax.value)
+        let to = clamp(internalTo.value, safeMin.value, safeMax.value)
         if (to <= from) {
-            internalTo.value = from + 1
-            return
+            to = from + 1
+            if (to > safeMax.value) {
+                to = safeMax.value
+                from = to - 1
+            }
         }
-        if (props.modelValue.from !== from || props.modelValue.to !== to) emit('update:modelValue', { from, to })
+        if (from !== internalFrom.value) internalFrom.value = from
+        if (to !== internalTo.value) internalTo.value = to
+        if (props.modelValue.from !== from || props.modelValue.to !== to) {
+            emit('update:modelValue', { from, to })
+        }
     })
-    watch(
-        () => props.modelValue,
-        ({ from, to }) => {
-            if (from !== internalFrom.value) internalFrom.value = from
-            if (to !== internalTo.value) internalTo.value = to
-        }
-    )
-    const total = computed(() => props.max - props.min)
-    const startPercent = computed(
-        () => ((internalFrom.value - props.min) / total.value) * 100
-    )
-    const endPercent = computed(
-        () => ((internalTo.value - props.min) / total.value) * 100
-    )
+    watch(() => props.modelValue,({ from, to }) => {
+        if (from !== internalFrom.value) internalFrom.value = from
+        if (to !== internalTo.value) internalTo.value = to
+    })
+    const startPercent = computed(() => clamp(((internalFrom.value - safeMin.value) / total.value) * 100, 0, 100))
+    const endPercent = computed(() => clamp(((internalTo.value - safeMin.value) / total.value) * 100, 0, 100))
     function onDrag(e) {
         if (!dragging.value || !track.value) return
         const rect = track.value.getBoundingClientRect()
         const x = e.clientX - rect.left
-        const percent = Math.min(Math.max(0, (x / rect.width) * 100), 100)
-        const value = Math.round(props.min + (percent / 100) * total.value)
+        const percent = clamp((x / rect.width) * 100, 0, 100)
+        const value = Math.round(safeMin.value + (percent / 100) * total.value)
         if (dragging.value === 'from') {
             internalFrom.value = Math.min(value, internalTo.value - 1)
         } else if (dragging.value === 'to') {

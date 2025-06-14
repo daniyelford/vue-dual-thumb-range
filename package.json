@@ -1,6 +1,6 @@
 {
   "name": "vue-dual-thumb-range",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "🎯 Simple dual-thumb range slider for Vue 3 without any dependencies.",
   "author": "Dnylfrd <29danialfrd69@gmail.com>",
   "license": "MIT",
