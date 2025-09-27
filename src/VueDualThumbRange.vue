@@ -1,18 +1,18 @@
 <template>
-    <div style="position: relative;height: 30px;margin: 10px 0;" ref="track" @mousedown="startDrag">
-        <div style="position: absolute;top: 50%;height: 4px;width: 100%;background-color: #ccc;transform: translateY(-50%);border-radius: 2px;z-index: 1;"></div>
-        <div :style="{left: `${startPercent}%`,width: `${endPercent - startPercent}%`,position: 'absolute',top: '50%',height: '4px',backgroundColor: '#3b82f6',transform: 'translateY(-50%)',borderRadius: '2px',zIndex: 2}"></div>
+    <div class="d-t-r" ref="track" @mousedown="startDrag">
+        <div class="d-t-r-from"></div>
+        <div class="d-t-r-progress" :style="{left: `${startPercent}%`,width: `${endPercent - startPercent}%`}"></div>
         <div :style="{ left: `${startPercent}%`,position: 'absolute',top: '50%',transform: 'translate(-50%, -50%)',height: '16px',width: '16px',backgroundColor: '#3b82f6',borderRadius: '50%',cursor: 'grab',zIndex: 3,border: '2px solid white',boxShadow: '0 0 2px rgba(0, 0, 0, 0.4)'}"@mousedown.prevent="dragging = 'from'"></div>
-        <div :style="{left: `${endPercent}%`,position: 'absolute',top: '50%',transform: 'translate(-50%, -50%)',height: '16px',width: '16px',backgroundColor: '#3b82f6',borderRadius: '50%',cursor: 'grab',zIndex: 3,border: '2px solid white',boxShadow: '0 0 2px rgba(0, 0, 0, 0.4)'}" @mousedown.prevent="dragging = 'to'"></div>
+        <div class="d-t-r-to" :style="{left: `${endPercent}%`}" @mousedown.prevent="dragging = 'to'"></div>
     </div>
-    <div style="display: flex;justify-content: space-between;font-size: 13px;margin-top: 10px;">
+    <div class="d-t-r-inputs">
         <label>
             from:
-            <input style="width: 60px;margin-right: 5px;" type="number" v-model.number="internalFrom" :min="min" :max="internalTo - 1" />
+            <input class="d-t-r-input" type="number" v-model.number="internalFrom" :min="min" :max="internalTo - 1" />
         </label>
         <label>
             to:
-            <input style="width: 60px;margin-right: 5px;" type="number" v-model.number="internalTo" :min="internalFrom + 1" :max="max" />
+            <input class="d-t-r-input" type="number" v-model.number="internalTo" :min="internalFrom + 1" :max="max" />
         </label>
     </div>
 </template>
@@ -25,6 +25,7 @@
             type: Object,
             default: () => ({ from: 10, to: 70 }),
         },
+        css: { type: String, default: '' },
     })
     const emit = defineEmits(['update:modelValue'])
     const dragging = ref(null)
@@ -78,5 +79,17 @@
         document.removeEventListener('mousemove', onDrag)
         document.removeEventListener('mouseup', stopDrag)
     }
+    onMounted(() => {
+        const style = document.createElement('style');
+        style.textContent = props.css && props.css.trim().length > 0 ? props.css : `
+        .d-t-r-progress{position: absolute;top: 50%;height: 4px;background-color: #3b82f6;transform: translateY(-50%);border-radius: 2px;z-index: 2}
+        .d-t-r-to{position: absolute;top: 50%;transform: translate(-50%, -50%);height: 16px;width: 16px;background-color: #3b82f6;border-radius: 50%;cursor: grab,z-index: 3;border: 2px solid white;box-shadow: 0 0 2px rgba(0, 0, 0, 0.4)}
+        .d-t-r-from{position: absolute;top: 50%;height: 4px;width: 100%;background-color: #ccc;transform: translateY(-50%);border-radius: 2px;z-index: 1;}
+        .d-t-r{position: relative;height: 30px;margin: 10px 0;}
+        .d-t-r-inputs{display: flex;justify-content: space-between;font-size: 13px;margin-top: 10px;}
+        .d-t-r-input{width: 60px;margin-right: 5px;}
+        `;
+        document.head.appendChild(style);
+    })
     onBeforeUnmount(() => stopDrag())
 </script>
