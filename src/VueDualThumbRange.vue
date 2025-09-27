@@ -82,10 +82,10 @@
     onMounted(() => {
         const style = document.createElement('style');
         style.textContent = props.css && props.css.trim().length > 0 ? props.css : `
-        .d-t-r-progress{position: absolute;top: 50%;height: 4px;background-color: #3b82f6;transform: translateY(-50%);border-radius: 2px;z-index: 2}
-        .d-t-r-to{position: absolute;top: 50%;transform: translate(-50%, -50%);height: 16px;width: 16px;background-color: #3b82f6;border-radius: 50%;cursor: grab,z-index: 3;border: 2px solid white;box-shadow: 0 0 2px rgba(0, 0, 0, 0.4)}
-        .d-t-r-from{position: absolute;top: 50%;height: 4px;width: 100%;background-color: #ccc;transform: translateY(-50%);border-radius: 2px;z-index: 1;}
         .d-t-r{position: relative;height: 30px;margin: 10px 0;}
+        .d-t-r-to{position: absolute;top: 50%;transform: translate(-50%, -50%);height: 16px;width: 16px;background-color: #3b82f6;border-radius: 50%;cursor: grab;z-index: 3;border: 2px solid white;box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);}
+        .d-t-r-progress{position: absolute;top: 50%;height: 4px;background-color: #3b82f6;transform: translateY(-50%);border-radius: 2px;z-index: 2;}
+        .d-t-r-from{position: absolute;top: 50%;height: 4px;width: 100%;background-color: #ccc;transform: translateY(-50%);border-radius: 2px;z-index: 1;}
         .d-t-r-inputs{display: flex;justify-content: space-between;font-size: 13px;margin-top: 10px;}
         .d-t-r-input{width: 60px;margin-right: 5px;}
         `;
